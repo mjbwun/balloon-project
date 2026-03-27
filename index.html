@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Balloon Party 🎈</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      transition: background-color 1s ease;
+      cursor: pointer;
+    }
+
+    .balloon {
+      position: absolute;
+      width: 50px;
+      height: 70px;
+      border-radius: 50%;
+      animation: floatUp 3s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-300px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<script>
+  // 🎨 Random colors
+  const colors = ["#ff4d4d", "#4dff88", "#4da6ff", "#ffff66", "#ff66cc", "#ffa64d"];
+
+  function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  // 🌈 Change background every 5 seconds
+  setInterval(() => {
+    document.body.style.backgroundColor = getRandomColor();
+  }, 5000);
+
+  // 🎈 Create balloon on click
+  document.addEventListener("click", (e) => {
+    const balloon = document.createElement("div");
+    balloon.classList.add("balloon");
+
+    // Set position where user clicked
+    balloon.style.left = e.clientX + "px";
+    balloon.style.top = e.clientY + "px";
+
+    // Random color
+    balloon.style.backgroundColor = getRandomColor();
+
+    document.body.appendChild(balloon);
+
+    // Remove after animation
+    setTimeout(() => {
+      balloon.remove();
+    }, 3000);
+  });
+</script>
+
+</body>
+</html>
